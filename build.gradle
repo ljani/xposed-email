@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.12.2'
+    }
+}
+
+apply plugin: 'com.android.application'
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion 'rovo89:Xposed Bridge API 54:15'
+    buildToolsVersion '20.0.0'
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 19
+        versionCode 1
+        versionName '1.0'
+    }
+
+    signingConfigs {
+        fileTree(dir: 'gradle', include: 'signing-*.gradle').visit { signingConfig ->
+            apply from: signingConfig.file, to: create(signingConfig.file.name[8..-8])
+        }
+    }
+
+    buildTypes {
+        release {
+            // TODO: Enable Proguard?
+            runProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            signingConfig signingConfigs.release
+        }
+    }
+}

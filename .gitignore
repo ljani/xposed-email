@@ -1,0 +1,9 @@
+.gradle/
+Thumbs.db
+build/
+gen/
+local.properties
+.idea/
+*.iml
+gradle/signing-*.gradle
+*.keystore
